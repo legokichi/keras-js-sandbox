@@ -1,0 +1,3 @@
+[submodule "keras-js"]
+	path = keras-js
+	url = https://github.com/transcranial/keras-js
