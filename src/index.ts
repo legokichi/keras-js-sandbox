@@ -46,12 +46,20 @@ async function main(){
   const outputData = await model.predict(inputData);
   console.timeEnd("predict");
   console.log(outputData);
-  let max_val = 0;
-  let max_index = 0;
+  const top3: {val: number; index: number}[] = [];
   outputData["predictions"].forEach((val, i)=>{
-    if(max_val < val){ max_index = i; }
+    if(top3.length === 0){
+      top3.push({val, index: i});
+    }else{
+      for(let j=0; j<top3.length; j++){
+        if(top3[j].val < val){
+          top3.splice(j, 0, {val, index: i});
+        }
+      }
+      top3.splice(10);
+    }
   });
-  console.log("category: ", max_index, "val:", max_val);
+  console.table(top3);
 }
 
 
