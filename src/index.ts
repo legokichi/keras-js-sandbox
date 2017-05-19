@@ -46,20 +46,19 @@ async function main(){
   const outputData = await model.predict(inputData);
   console.timeEnd("predict");
   console.log(outputData);
+
+  await new Promise((resolve)=> setTimeout(resolve, 1000));
+
   const top3: {val: number; index: number}[] = [];
-  outputData["predictions"].forEach((val, i)=>{
-    if(top3.length === 0){
-      top3.push({val, index: i});
-    }else{
-      for(let j=0; j<top3.length; j++){
-        if(top3[j].val < val){
-          top3.splice(j, 0, {val, index: i});
-        }
-      }
-      top3.splice(10);
-    }
-  });
-  console.table(top3);
+  const output: Float32Array = outputData[Object.keys(outputData)[0]];
+  console.time("sort");
+  const sorted = new Float32Array(output).sort();
+  console.timeEnd("sort");
+
+  console.log(output.indexOf(sorted[0]), sorted[0]);
+  console.log(output.indexOf(sorted[1]), sorted[1]);
+  console.log(output.indexOf(sorted[2]), sorted[2]);
+  console.log(output.indexOf(sorted[3]), sorted[3]);
 }
 
 
