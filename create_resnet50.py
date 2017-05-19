@@ -11,7 +11,8 @@ if __name__ == '__main__':
 
   model = ResNet50(include_top=True, weights='imagenet', input_tensor=None, input_shape=None)
   
-  import util  
-  util.create_mode(model)
+  import util_model
+  util_model.convert(model)
+
 
   exit()
