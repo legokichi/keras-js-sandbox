@@ -7,7 +7,7 @@ set_image_data_format("channels_last") # tensorflow
 
 if __name__ == '__main__':
   import subprocess
-  subprocess.call("cd squeezenet_demo; git reset --hard; patch -p1 < squeezenet_demo.patch", shell=True)
+  subprocess.call("cd squeezenet_demo; git reset --hard; patch -p1 < ../squeezenet_demo.patch", shell=True)
 
   from squeezenet_demo.model import SqueezeNet
 
