@@ -24,10 +24,14 @@ if __name__ == '__main__':
         from keras.applications.vgg16 import VGG16
         model = VGG16(include_top=True, weights='imagenet', input_tensor=None, input_shape=None)
     elif args.model == "squeezenet":
-        import subprocess
-        subprocess.call("cd squeezenet_demo; git reset --hard; patch -p1 < ../squeezenet_demo.patch", shell=True)
-        from squeezenet_demo.model import SqueezeNet
-        model = SqueezeNet(nb_classes=1000)
+        import sys
+        sys.path.append("./keras-squeezenet")
+        from keras_squeezenet import SqueezeNet
+        model = SqueezeNet(input_tensor=None, input_shape=None, weights='imagenet', classes=1000)
+        #import subprocess
+        #subprocess.call("cd squeezenet_demo; git reset --hard; patch -p1 < ../squeezenet_demo.patch", shell=True)
+        #from squeezenet_demo.model import SqueezeNet
+        #model = SqueezeNet(nb_classes=1000)
     else:
         exit()
 

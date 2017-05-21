@@ -1,6 +1,6 @@
 [submodule "keras-js"]
 	path = keras-js
 	url = https://github.com/transcranial/keras-js
-[submodule "squeezenet_demo"]
-	path = squeezenet_demo
-	url = https://github.com/DT42/squeezenet_demo.git
+[submodule "keras-squeezenet"]
+	path = keras-squeezenet
+	url = https://github.com/rcmalli/keras-squeezenet.git

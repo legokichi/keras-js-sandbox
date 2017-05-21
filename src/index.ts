@@ -103,6 +103,12 @@ async function main(){
     await new Promise((resolve)=> setTimeout(resolve, 10));
   }
 }
+window.addEventListener("error", (ev)=>{
+  console.error(ev, ev.error);
+  alert(ev+":"+ev.error);
+});
 
-
-main();
+main().catch((err)=>{
+  console.error(ev, ev.error);
+  alert(ev+":"+ev.error);
+});
