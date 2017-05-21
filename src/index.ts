@@ -1,4 +1,3 @@
-
 async function main(){
   console.log("main");
   
@@ -103,12 +102,8 @@ async function main(){
     await new Promise((resolve)=> setTimeout(resolve, 10));
   }
 }
-window.addEventListener("error", (ev)=>{
-  console.error(ev, ev.error);
-  alert(ev+":"+ev.error);
-});
 
-main().catch((err)=>{
+main().catch((ev)=>{
   console.error(ev, ev.error);
   alert(ev+":"+ev.error);
 });
