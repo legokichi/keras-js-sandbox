@@ -95,7 +95,12 @@ async function main(){
     console.log(top10);
     top10.forEach(({cat, val})=>{
       const li = document.createElement("li");
-      li.appendChild(document.createTextNode(cat[1]));
+      if(cat[1] != null){
+        li.appendChild(document.createTextNode(cat[1]));
+      }else{
+        li.appendChild(document.createTextNode("error"));
+      }
+
       ul.appendChild(li);
     });
 

@@ -4,3 +4,6 @@
 [submodule "keras-squeezenet"]
 	path = keras-squeezenet
 	url = https://github.com/rcmalli/keras-squeezenet.git
+[submodule "keras_compressor"]
+	path = keras_compressor
+	url = https://github.com/nico-opendata/keras_compressor

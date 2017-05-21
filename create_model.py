@@ -1,7 +1,8 @@
 if __name__ == '__main__':
     import argparse
-    parser = argparse.ArgumentParser(description='keras.js model converter')
+    parser = argparse.ArgumentParser(description='keras.js imagenet model converter')
     parser.add_argument("--model", action='store', type=str, default="", help='resnet50 | inception_v3 | vgg16 | xception | squeezenet')
+    parser.add_argument("--compress", action='store_true', help='use https://github.com/nico-opendata/keras_compressor')
     args = parser.parse_args()
 
     from keras.backend import set_image_data_format, set_floatx, floatx
@@ -28,12 +29,19 @@ if __name__ == '__main__':
         sys.path.append("./keras-squeezenet")
         from keras_squeezenet import SqueezeNet
         model = SqueezeNet(input_tensor=None, input_shape=None, weights='imagenet', classes=1000)
-        #import subprocess
-        #subprocess.call("cd squeezenet_demo; git reset --hard; patch -p1 < ../squeezenet_demo.patch", shell=True)
-        #from squeezenet_demo.model import SqueezeNet
-        #model = SqueezeNet(nb_classes=1000)
     else:
         exit()
+
+    if args.compress == True:
+        model.save("model_original.hdf5")
+        import sys
+        sys.path.append("./keras_compressor/keras_compressor")
+        import subprocess
+        subprocess.call("python ./keras_compressor/bin/keras-compressor.py model_original.hdf5 model_compressed.hdf5 --log-level DEBUG", shell=True)
+        from keras.models import load_model
+        model = load_model("model_compressed.hdf5")
+        model.summary()
+        model.save_weights("model.hdf5")
 
     model.summary()
     model.save_weights("model.hdf5")
